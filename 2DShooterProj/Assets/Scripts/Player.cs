@@ -7,10 +7,22 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Animator animator;
-    private Transform playerTransform;
+    public Transform playerTransform;
+    private int lives = 3;
+
+    public static Player instance;
 
     void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         animator = GetComponent<Animator>();
         playerTransform = GetComponent<Transform>();
     }
@@ -18,13 +30,25 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+
+        if(lives <= 0)
+        {
+            playerTransform.position = new Vector3(0, 0, 0);
+            lives = 3;
+            //Destroy(gameObject);
+        }
     }
 
     void Move()
     {
-        float moveX = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
-        float moveY = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;
-        playerTransform.Translate(moveX, moveY, 0);
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        playerTransform.Translate(new Vector3(moveX, moveY, 0).normalized * speed * Time.deltaTime);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        lives--;
+        print(lives);
+    }
 }
