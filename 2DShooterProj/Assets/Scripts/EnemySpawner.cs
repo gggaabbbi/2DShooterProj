@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             float xPosition = Random.Range(minSpawnPosition.x, maxSpawnPosition.x);
             float yPosition = Random.Range(minSpawnPosition.y, maxSpawnPosition.y);
             Instantiate(enemyDino, new Vector2(xPosition, yPosition), Quaternion.identity);
