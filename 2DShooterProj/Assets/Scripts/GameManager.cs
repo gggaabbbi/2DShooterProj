@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [HideInInspector] public int gameScore = 0;
+    [HideInInspector] public int playerLifes;
     private void Awake()
     {
         if (instance == null)
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
     }
 
     public Vector3 GetMousePosition()
@@ -26,4 +29,20 @@ public class GameManager : MonoBehaviour
         return mousePosition;
     }
 
+    public int GetScore()
+    {
+        return gameScore;
+    }
+
+    public void SetGameScore(int score)
+    {
+        gameScore += score;
+        UIManager.instance.SetScoreText(gameScore);
+    }
+
+    public void SetPlayerLife(int lifes)
+    {
+        playerLifes = lifes;
+        UIManager.instance.SetLifesText(playerLifes);
+    }
 }
