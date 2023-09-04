@@ -15,6 +15,9 @@ public class PlayerInfo : MonoBehaviour
     private bool isHurt;
     public bool isMoving;
 
+    private int playerLevel;
+    private int currentPlayerXP;
+    private int toLevelUpXP = 10;
     void Awake()
     {
         if (instance == null)
@@ -40,20 +43,44 @@ public class PlayerInfo : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            LifeHandler();
+            LifeHandler(-1);
         }
     }
 
-    void LifeHandler()
+    public void LifeHandler(int value)
     {
-        isHurt = true;
-        lifes--;
-        GameManager.instance.SetPlayerLife(lifes);
-        if (lifes <= 0)
+        if (value > 0)
         {
-            playerTransform.position = new Vector3(0, 0, 0);
-            lifes = initialLives;
+            lifes += value;
         }
+        else
+        {
+            isHurt = true;
+            lifes += value;
+
+            if (lifes <= 0)
+            {
+                playerTransform.position = new Vector3(0, 0, 0);
+                lifes = initialLives;
+            }
+        }
+        GameManager.instance.SetPlayerLife(lifes);
+    }
+    public bool CheckPlayerMove()
+    {
+        return isMoving;
+    }
+    private void CheckLevelUp()
+    {
+        if (currentPlayerXP >= toLevelUpXP)
+        {
+            playerLevel++;
+            currentPlayerXP -= toLevelUpXP;
+            toLevelUpXP += 5;
+            GameManager.instance.OnLevelUp();
+        }
+
+        GameManager.instance.SetLevelInfo(playerLevel, currentPlayerXP, toLevelUpXP);
     }
 
     public Vector2 GetPlayerPosition()
@@ -66,10 +93,6 @@ public class PlayerInfo : MonoBehaviour
         return playerSpeed;
     }
 
-    public bool CheckPlayerMove()
-    {
-        return isMoving;
-    }
 
     public bool CheckPlayerHurt()
     {
@@ -85,4 +108,16 @@ public class PlayerInfo : MonoBehaviour
     {
         return spriteRenderer;
     }
+
+    public int GetPlayerLevel()
+    {
+        return playerLevel;
+    }
+
+    public void SetCurrentXP(int xpToAdd)
+    {
+        currentPlayerXP += xpToAdd;
+        CheckLevelUp();
+    }
+
 }
