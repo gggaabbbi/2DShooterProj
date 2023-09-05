@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public void SetGameScore(int score)
     {
         gameScore += score;
+        PlayerInfo.instance.SetCurrentXP(score);
         UIManager.instance.SetScoreText(gameScore);
     }
 

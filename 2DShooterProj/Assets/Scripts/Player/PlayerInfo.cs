@@ -62,6 +62,11 @@ public class PlayerInfo : MonoBehaviour
             {
                 playerTransform.position = new Vector3(0, 0, 0);
                 lifes = initialLives;
+                playerLevel = 0; currentPlayerXP = 0;
+                GameManager.instance.gameScore = 0;
+                UIManager.instance.SetScoreText(currentPlayerXP);
+                UIManager.instance.SetXPInfoText(currentPlayerXP, toLevelUpXP);
+                UIManager.instance.SetPlayerLevelText(playerLevel);
             }
         }
         GameManager.instance.SetPlayerLife(lifes);
