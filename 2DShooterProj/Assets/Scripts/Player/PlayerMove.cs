@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,31 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private float speed;
+    private float normalSpeed;
+    [SerializeField] private GameObject dash;
+    private bool canDash = true;
+
     private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        speed = PlayerInfo.instance.GetPlayerSpeed();
+        normalSpeed = PlayerInfo.instance.GetPlayerSpeed();
         spriteRenderer = PlayerInfo.instance.GetSpriteRenderer();
+        speed = normalSpeed;
     }
 
     void Update()
     {
         MoveHandler();
+        DashHandler();
+    }
+
+    void DashHandler()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     void MoveHandler()
@@ -39,5 +54,17 @@ public class PlayerMove : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+    }
+
+    IEnumerator Dash()
+    {
+        speed = 2 * normalSpeed;
+        dash.gameObject.SetActive(true);
+        canDash = false;
+        yield return new WaitForSeconds(.2f);
+        speed = normalSpeed;
+        dash.gameObject.SetActive(false);
+        yield return new WaitForSeconds(5f);
+        canDash = true;
     }
 }
