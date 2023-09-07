@@ -11,11 +11,13 @@ public class PlayerMove : MonoBehaviour
     private bool canDash = true;
 
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D playerRig;
 
     void Start()
     {
         normalSpeed = PlayerInfo.instance.GetPlayerSpeed();
         spriteRenderer = PlayerInfo.instance.GetSpriteRenderer();
+        playerRig = GetComponent<Rigidbody2D>();
         speed = normalSpeed;
     }
 
@@ -23,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     {
         MoveHandler();
         DashHandler();
+        //RecoilHandler();
     }
 
     void DashHandler()
@@ -42,6 +45,14 @@ public class PlayerMove : MonoBehaviour
         FlipSprite(moveX);
 
     }
+
+    /*void RecoilHandler()
+    {
+        if (PlayerInfo.instance.CheckRecoil())
+        {
+            playerRig.AddForce(transform.forward * 10 * -1);
+        }
+    }*/
 
     void FlipSprite(float moveX)
     {

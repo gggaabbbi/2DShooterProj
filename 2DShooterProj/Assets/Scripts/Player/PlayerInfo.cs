@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerInfo : MonoBehaviour
     private int playerLevel;
     private int currentPlayerXP;
     private int toLevelUpXP = 10;
+
+    private bool recoil;
     void Awake()
     {
         if (instance == null)
@@ -63,6 +66,7 @@ public class PlayerInfo : MonoBehaviour
                 playerTransform.position = new Vector3(0, 0, 0);
                 lifes = initialLives;
                 playerLevel = 0; currentPlayerXP = 0;
+                toLevelUpXP = 10;
                 GameManager.instance.gameScore = 0;
                 UIManager.instance.SetScoreText(currentPlayerXP);
                 UIManager.instance.SetXPInfoText(currentPlayerXP, toLevelUpXP);
@@ -71,6 +75,7 @@ public class PlayerInfo : MonoBehaviour
         }
         GameManager.instance.SetPlayerLife(lifes);
     }
+
     public bool CheckPlayerMove()
     {
         return isMoving;
@@ -123,6 +128,16 @@ public class PlayerInfo : MonoBehaviour
     {
         currentPlayerXP += xpToAdd;
         CheckLevelUp();
+    }
+
+    public bool CheckRecoil()
+    {
+        return recoil;
+    }
+
+    public void SetRecoil(bool recoil)
+    {
+        recoil = false;
     }
 
 }

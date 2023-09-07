@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDino: {fileID: 3937608924352448503, guid: be78148c29a874242b3842b02679b255, type: 3}
+  enemyBear: {fileID: 3632034953498142275, guid: 0a24bb8d0e322764bb45eed967fbb591, type: 3}
   minSpawnPosition: {x: 15, y: -10}
   maxSpawnPosition: {x: -15, y: 10}
 --- !u!4 &357923756
@@ -744,7 +745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/10
+  m_text: 0 / 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

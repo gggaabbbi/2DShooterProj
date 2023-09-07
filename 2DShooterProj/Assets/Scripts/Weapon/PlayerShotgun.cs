@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerShotgun : MonoBehaviour
 {
+    public static PlayerShotgun instance;
+
+
     private Transform aimTransform;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform weapon;
@@ -12,6 +15,15 @@ public class PlayerShotgun : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         aimTransform = GetComponent<Transform>();
     }
 
@@ -35,6 +47,13 @@ public class PlayerShotgun : MonoBehaviour
             Instantiate(bulletPrefab, weapon.position, weapon.rotation);
             Instantiate(bulletPrefab, weapon2.position, weapon2.rotation);
             Instantiate(bulletPrefab, weapon3.position, weapon3.rotation);
+            PlayerInfo.instance.SetRecoil(true);
         }
+        PlayerInfo.instance.SetRecoil(false);
+    }
+
+    public Transform GetAimPosition()
+    {
+        return aimTransform;
     }
 }
