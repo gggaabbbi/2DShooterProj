@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PowerUpShptgun : MonoBehaviour
+public class PowerUpDash : MonoBehaviour
 {
     [Header("PowerUp Info")]
     [SerializeField] private Button button;
@@ -16,27 +16,16 @@ public class PowerUpShptgun : MonoBehaviour
     [SerializeField] private TextMeshProUGUI powerUpNameText;
     [SerializeField] private Image powerUpIcon;
 
-    [Header("Weapons Info")]
-    [SerializeField] private GameObject pistol;
-    [SerializeField] private GameObject shotgun;
-    [SerializeField] private GameObject WeaponAnchor;
-    private GameObject playerPistol;
-
     void Awake()
     {
-        button.onClick.AddListener(SwitchToShotgun);
+        button.onClick.AddListener(Dash);
         powerUpIcon.sprite = icon;
         powerUpNameText.text = name;
     }
 
-    private void SwitchToShotgun()
+    private void Dash()
     {
-        pistol.SetActive(false);
-        shotgun.SetActive(true);
-        playerPistol = WeaponAnchor.GetComponent(PlayerPistol);
-
-        //PlayerPistol.SetActive(false);
-        //PlayerShotgun.SetActive(true);
+        PlayerMove.instance.SetPowerUpDash(true);
         Time.timeScale = 1;
         UIManager.instance.SetPowerUpContainer(false);
         gameObject.SetActive(false);

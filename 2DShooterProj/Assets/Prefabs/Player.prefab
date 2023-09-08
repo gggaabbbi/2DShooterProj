@@ -35,8 +35,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6765480097186487556}
   - {fileID: 1559447325881188470}
+  - {fileID: 6765480097186487556}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -200,6 +200,8 @@ MonoBehaviour:
   playerSpeed: 10
   lifes: 3
   isMoving: 0
+  powerupDash: {fileID: 0}
+  powerupShotgun: {fileID: 0}
 --- !u!114 &6145855955680706934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4667715950435897933
 Transform:
   m_ObjectHideFlags: 0
@@ -384,7 +386,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4249555914918503626}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb257519e607bc47acd23a6e76948e8, type: 3}
   m_Name: 
@@ -398,7 +400,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4249555914918503626}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 246f7b40d9dd1774b9aac96766b68bb9, type: 3}
   m_Name: 

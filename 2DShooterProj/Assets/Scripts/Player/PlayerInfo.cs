@@ -21,6 +21,12 @@ public class PlayerInfo : MonoBehaviour
     private int toLevelUpXP = 10;
 
     private bool recoil;
+
+    private bool canDash = true;
+    private bool powerUpDash = false;
+
+    [SerializeField]private GameObject powerupDash;
+    [SerializeField]private GameObject powerupShotgun;
     void Awake()
     {
         if (instance == null)
@@ -71,6 +77,8 @@ public class PlayerInfo : MonoBehaviour
                 UIManager.instance.SetScoreText(currentPlayerXP);
                 UIManager.instance.SetXPInfoText(currentPlayerXP, toLevelUpXP);
                 UIManager.instance.SetPlayerLevelText(playerLevel);
+                powerupDash.gameObject.SetActive(true);
+                powerupShotgun.gameObject.SetActive(true);
             }
         }
         GameManager.instance.SetPlayerLife(lifes);
@@ -93,6 +101,7 @@ public class PlayerInfo : MonoBehaviour
         GameManager.instance.SetLevelInfo(playerLevel, currentPlayerXP, toLevelUpXP);
     }
 
+    //PLAYER
     public Vector2 GetPlayerPosition()
     {
         return playerTransform.position;
@@ -119,6 +128,7 @@ public class PlayerInfo : MonoBehaviour
         return spriteRenderer;
     }
 
+    //XP
     public int GetPlayerLevel()
     {
         return playerLevel;
@@ -130,14 +140,14 @@ public class PlayerInfo : MonoBehaviour
         CheckLevelUp();
     }
 
+    //RECOIL
+
+    public void SetRecoil(bool Recoil)
+    {
+        recoil = Recoil;
+    }
     public bool CheckRecoil()
     {
         return recoil;
     }
-
-    public void SetRecoil(bool recoil)
-    {
-        recoil = false;
-    }
-
 }

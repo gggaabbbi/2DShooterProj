@@ -11,15 +11,10 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnBoss());
     }
 
-    void Update()
-    {
-        //if (PlayerInfo.instance.GetPlayerLevel() == 3)
-        //{
-        //    SpawnBoss();
-        //}
-    }
+
 
     private IEnumerator SpawnEnemies()
     {
@@ -32,10 +27,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void SpawnBoss()
+    private IEnumerator SpawnBoss()
     {
-        float xPosition = Random.Range(minSpawnPosition.x, maxSpawnPosition.x);
-        float yPosition = Random.Range(minSpawnPosition.y, maxSpawnPosition.y);
-        Instantiate(enemyBear, new Vector2(xPosition, yPosition), Quaternion.identity);
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(10f);
+            float xPosition = Random.Range(minSpawnPosition.x, maxSpawnPosition.x);
+            float yPosition = Random.Range(minSpawnPosition.y, maxSpawnPosition.y);
+            Instantiate(enemyBear, new Vector2(xPosition, yPosition), Quaternion.identity);
+        }
     }
 }

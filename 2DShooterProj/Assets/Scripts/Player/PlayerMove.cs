@@ -5,13 +5,28 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove instance;
+
     private float speed;
     private float normalSpeed;
     [SerializeField] private GameObject dash;
     private bool canDash = true;
+    private bool powerUpDash = false;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D playerRig;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start()
     {
@@ -25,12 +40,12 @@ public class PlayerMove : MonoBehaviour
     {
         MoveHandler();
         DashHandler();
-        //RecoilHandler();
+        RecoilHandler();
     }
 
     void DashHandler()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && powerUpDash)
         {
             StartCoroutine(Dash());
         }
@@ -46,13 +61,14 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    /*void RecoilHandler()
+    void RecoilHandler()
     {
-        if (PlayerInfo.instance.CheckRecoil())
+        if (PlayerInfo.instance.CheckRecoil() == true)
         {
-            playerRig.AddForce(transform.forward * 10 * -1);
+            print("foi");
+            playerRig.AddForce(transform.forward * 100);
         }
-    }*/
+    }
 
     void FlipSprite(float moveX)
     {
@@ -77,5 +93,10 @@ public class PlayerMove : MonoBehaviour
         dash.gameObject.SetActive(false);
         yield return new WaitForSeconds(5f);
         canDash = true;
+    }
+
+    public void SetPowerUpDash(bool dash)
+    {
+        powerUpDash = dash;
     }
 }
