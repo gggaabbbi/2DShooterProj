@@ -17,10 +17,9 @@ public class PowerUpShptgun : MonoBehaviour
     [SerializeField] private Image powerUpIcon;
 
     [Header("Weapons Info")]
-    [SerializeField] private GameObject pistol;
-    [SerializeField] private GameObject shotgun;
     [SerializeField] private GameObject WeaponAnchor;
-    private GameObject playerPistol;
+    [SerializeField] private GameObject WeaponAnchorShotgun;
+
 
     void Awake()
     {
@@ -31,12 +30,8 @@ public class PowerUpShptgun : MonoBehaviour
 
     private void SwitchToShotgun()
     {
-        pistol.SetActive(false);
-        shotgun.SetActive(true);
-        playerPistol = WeaponAnchor.GetComponent(PlayerPistol);
-
-        //PlayerPistol.SetActive(false);
-        //PlayerShotgun.SetActive(true);
+        WeaponAnchor.SetActive(false);
+        WeaponAnchorShotgun.SetActive(true);
         Time.timeScale = 1;
         UIManager.instance.SetPowerUpContainer(false);
         gameObject.SetActive(false);
