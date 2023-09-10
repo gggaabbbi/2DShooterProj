@@ -8,6 +8,8 @@ public class PlayerPistol : MonoBehaviour
     private Transform aimTransform;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform weapon;
+    [SerializeField] private float fireRate;
+    float nextFire;
 
     void Awake()
     {
@@ -31,6 +33,15 @@ public class PlayerPistol : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
             Instantiate(bulletPrefab, weapon.position, weapon.rotation);
         }
     }

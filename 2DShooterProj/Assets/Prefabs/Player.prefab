@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715162823061478422}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.021750927, y: 0.598727, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -280,6 +280,9 @@ MonoBehaviour:
   isMoving: 0
   powerupDash: {fileID: 0}
   powerupShotgun: {fileID: 0}
+  powerupPistol: {fileID: 0}
+  weaponAnchor: {fileID: 7067667309576536072}
+  weaponAnchorShotgun: {fileID: 8495669129721837998}
 --- !u!114 &5695294824291811327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1981924285543683618, guid: 06442a90fd2755b4b8462508f4afb34c, type: 3}
   weapon: {fileID: 324901046359457468}
+  fireRate: 0.3
 --- !u!1 &8495669129721837998
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246f7b40d9dd1774b9aac96766b68bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 0.7
   bulletPrefab: {fileID: 1981924285543683618, guid: 06442a90fd2755b4b8462508f4afb34c, type: 3}
   weapon: {fileID: 286366824072549146}
   weapon2: {fileID: 401379406060630484}

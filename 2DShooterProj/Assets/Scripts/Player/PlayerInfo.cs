@@ -25,8 +25,11 @@ public class PlayerInfo : MonoBehaviour
     private bool canDash = true;
     private bool powerUpDash = false;
 
-    [SerializeField]private GameObject powerupDash;
-    [SerializeField]private GameObject powerupShotgun;
+    [SerializeField] private GameObject powerupDash;
+    [SerializeField] private GameObject powerupShotgun;
+    [SerializeField] private GameObject powerupPistol;
+    [SerializeField] private GameObject weaponAnchor;
+    [SerializeField] private GameObject weaponAnchorShotgun;
     void Awake()
     {
         if (instance == null)
@@ -79,6 +82,9 @@ public class PlayerInfo : MonoBehaviour
                 UIManager.instance.SetPlayerLevelText(playerLevel);
                 powerupDash.gameObject.SetActive(true);
                 powerupShotgun.gameObject.SetActive(true);
+                powerupPistol.gameObject.SetActive(false);
+                weaponAnchor.gameObject.SetActive(true);
+                weaponAnchorShotgun.gameObject.SetActive(false);
             }
         }
         GameManager.instance.SetPlayerLife(lifes);

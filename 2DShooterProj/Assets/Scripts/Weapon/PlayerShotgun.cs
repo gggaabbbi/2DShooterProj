@@ -6,8 +6,9 @@ public class PlayerShotgun : MonoBehaviour
 {
     public static PlayerShotgun instance;
 
-
     private Transform aimTransform;
+    [SerializeField] private float fireRate;
+    float nextFire;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform weapon;
     [SerializeField] private Transform weapon2;
@@ -44,12 +45,23 @@ public class PlayerShotgun : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            StartCoroutine(Shoot());
+        }
+        PlayerInfo.instance.SetRecoil(false);
+    }
+
+    IEnumerator Shoot()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
             Instantiate(bulletPrefab, weapon.position, weapon.rotation);
+            yield return new WaitForSeconds(.01f);
             Instantiate(bulletPrefab, weapon2.position, weapon2.rotation);
+            yield return new WaitForSeconds(.01f);
             Instantiate(bulletPrefab, weapon3.position, weapon3.rotation);
             PlayerInfo.instance.SetRecoil(true);
         }
-        PlayerInfo.instance.SetRecoil(false);
     }
 
     public Transform GetAimPosition()

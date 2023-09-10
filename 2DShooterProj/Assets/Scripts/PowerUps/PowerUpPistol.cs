@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PowerUpShotgun : MonoBehaviour
+public class PowerUpPistol : MonoBehaviour
 {
     [Header("PowerUp Info")]
     [SerializeField] private Button button;
@@ -19,23 +19,23 @@ public class PowerUpShotgun : MonoBehaviour
     [Header("Weapons Info")]
     [SerializeField] private GameObject weaponAnchor;
     [SerializeField] private GameObject weaponAnchorShotgun;
-    [SerializeField] private GameObject powerUpPistol;
+    [SerializeField] private GameObject powerUpShotgun;
 
 
     void Awake()
     {
-        button.onClick.AddListener(SwitchToShotgun);
+        button.onClick.AddListener(SwitchToPistol);
         powerUpIcon.sprite = icon;
         powerUpNameText.text = name;
     }
 
-    private void SwitchToShotgun()
+    private void SwitchToPistol()
     {
-        weaponAnchor.SetActive(false);
-        weaponAnchorShotgun.SetActive(true);
+        weaponAnchorShotgun.gameObject.SetActive(false);
+        weaponAnchor.gameObject.SetActive(true);
         Time.timeScale = 1;
         UIManager.instance.SetPowerUpContainer(false);
         gameObject.SetActive(false);
-        powerUpPistol.gameObject.SetActive(true);
+        powerUpShotgun.gameObject.SetActive(true);
     }
 }
